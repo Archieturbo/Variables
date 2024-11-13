@@ -1,0 +1,23 @@
+name: variables
+
+on:
+  workflow_dispatch:
+    inputs:
+      viktig:
+        description: 'Viktig number input'
+        required: true
+        type: number  
+        
+
+        
+jobs:
+    build-project:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check if viktig is less than 7
+          if: github.event.inputs.viktig < 7
+          run: echo "Input is less than 7, job will not run"
+        - name: Run the job
+          if: github.event.inputs.viktig >= 7
+          run: echo "Input is 7 or greater, running the job"
+      
