@@ -8,16 +8,27 @@ on:
         required: true
         type: number  
         
+env:
+  GLOBAL_ENV: "det här är global workflow"
 
         
 jobs:
     build-project:
       runs-on: ubuntu-latest
+      env:
+        JOB_ENV: "Det här är ett i job"
       steps:
         - name: Check if viktig is less than 7
           if: github.event.inputs.viktig < 7
           run: echo "Input is less than 7, job will not run"
         - name: Run the job
           if: github.event.inputs.viktig >= 7
-          run: echo "Input is 7 or greater, running the job"
+          env:
+            STEP_ENV: "Det här är step variabel"
+          run: | 
+            echo "Input is 7 or greater, running the job"
+            echo "Workflow variabel: $GLOBAL_ENV"
+            echo "Job variabel: $JOB_ENV"
+            echo "Steps variabel: $STEP_ENV"
       
+    
