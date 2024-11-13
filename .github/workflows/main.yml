@@ -30,5 +30,6 @@ jobs:
             echo "Workflow variabel: $GLOBAL_ENV"
             echo "Job variabel: $JOB_ENV"
             echo "Steps variabel: $STEP_ENV"
-      
+        - name: Print all env variables
+          run: printenv
     
