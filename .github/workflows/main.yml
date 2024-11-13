@@ -27,7 +27,7 @@ jobs:
             STEP_ENV: "Det här är step variabel"
           run: | 
             echo "Input is 7 or greater, running the job"
-            echo "Workflow variabel: $GLOBAL_ENV"
+            echo "Workflow variabel: ${{GLOBAL_ENV}}"
             echo "Job variabel: $JOB_ENV"
             echo "Steps variabel: $STEP_ENV"
       
