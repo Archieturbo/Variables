@@ -1,0 +1,30 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+    - main   # Kör analys vid push till main
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # SonarCloud kräver Java 11 eller senare
+
+      
+      - name: SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Använd SonarCloud-token från secrets
+        run: |
+          sonar-scanner \
+            ./gradlew build
+          sonar-scanner   
