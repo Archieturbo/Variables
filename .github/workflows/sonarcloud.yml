@@ -21,11 +21,15 @@ jobs:
           java-version: '11'  # SonarCloud kräver Java 11 eller senare
           distribution: 'adopt'
 
+      - name: Install SonarScanner
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
       
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Använd SonarCloud-token från secrets
         run: |
-          sonar-scanner \
-            ./gradlew build
-          sonar-scanner   
+          ./gradlew build
+          sonar-scanner
